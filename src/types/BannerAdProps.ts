@@ -71,6 +71,14 @@ export interface BannerAdProps {
    * Called when the user is about to return to the app after tapping on an ad.
    */
   onAdClosed?: () => void;
+
+  // custom
+
+  /**
+   * @platform ios
+   * Called when a click is recorded for an ad.
+   */
+  onAdClicked?: () => void;
 }
 
 /**

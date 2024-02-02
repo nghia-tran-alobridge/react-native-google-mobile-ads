@@ -120,6 +120,7 @@
 }
 
 - (void)bannerViewDidReceiveAd:(GADBannerView *)bannerView {
+    NSLog(@"--debug -- RNGoogleMobileAdsBannerComponent -- bannerViewDidReceiveAd");
   [self sendEvent:@"onAdLoaded"
           payload:@{
             @"width" : @(bannerView.bounds.size.width),
@@ -133,6 +134,7 @@
 }
 
 - (void)bannerViewWillPresentScreen:(GADBannerView *)bannerView {
+    NSLog(@"--debug -- RNGoogleMobileAdsBannerComponent -- bannerViewWillPresentScreen");
   [self sendEvent:@"onAdOpened" payload:nil];
 }
 
@@ -141,17 +143,24 @@
 }
 
 - (void)bannerViewDidDismissScreen:(GADBannerView *)bannerView {
+    NSLog(@"--debug -- RNGoogleMobileAdsBannerComponent -- bannerViewDidDismissScreen");
   [self sendEvent:@"onAdClosed" payload:nil];
 }
 
 - (void)adView:(nonnull GADBannerView *)banner
     didReceiveAppEvent:(nonnull NSString *)name
               withInfo:(nullable NSString *)info {
+    NSLog(@"--debug -- RNGoogleMobileAdsBannerComponent -- didReceiveAppEvent");
   [self sendEvent:@"onAppEvent"
           payload:@{
             @"name" : name,
             @"data" : info,
           }];
+}
+
+- (void)bannerViewDidRecordClick:(nonnull GADBannerView *)bannerView {
+    NSLog(@"--debug -- RNGoogleMobileAdsBannerComponent -- bannerViewDidRecordClick");
+    [self sendEvent:@"onAdClicked" payload:@{}];
 }
 
 - (void)recordManualImpression {
